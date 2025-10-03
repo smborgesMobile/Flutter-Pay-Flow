@@ -1,53 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:learning_project/modules/splash/splash_page.dart';
+import 'package:learning_project/shared/themes/app_colors.dart';
 
 void main() {
-  runApp(
-    MaterialApp(
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.purple,
-          brightness: Brightness.light,
-        ),
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.purple,
-          foregroundColor: Colors.white,
-        ),
-      ),
-      home: HomePage(),
-    ),
-  );
+  runApp(AppWidget());
 }
 
-// StatelessWidget não muda o componente após o primeiro build.
-class HomePage extends StatefulWidget {
-  HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  var counter = 0;
-
-  void increment() {
-    counter++;
-    setState(() {});
-  }
+class AppWidget extends StatelessWidget {
+  const AppWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Meu Primeiro App")),
-      body: Center(
-        child: Text("Contador\n$counter", textAlign: TextAlign.center),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          increment();
-        },
-        child: Icon(Icons.add),
-      ),
+    return MaterialApp(
+      title: "Pay Flow",
+      theme: ThemeData(primaryColor: AppColors.primary),
+      home: SplashPage()
     );
   }
 }
