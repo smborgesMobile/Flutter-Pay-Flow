@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:learning_project/modules/login/login_page.dart';
-import 'package:learning_project/modules/splash/splash_page.dart';
 import 'package:learning_project/shared/themes/app_colors.dart';
 
 void main() {
