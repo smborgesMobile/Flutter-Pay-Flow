@@ -18,45 +18,42 @@ class _LoginPageState extends State<LoginPage> {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: SizedBox(
-        width: size.width,
-        height: size.height,
-        child: Stack(
-          children: [
-            Container(
-              color: AppColors.primary,
-              height: 0.30 * size.height,
+      body: Stack(
+        children: [
+          Container(
+            height: size.height * 0.30,
+            width: size.width,
+            color: AppColors.primary,
+          ),
+          SingleChildScrollView(
+            child: SizedBox(
               width: size.width,
-            ),
-            Positioned(
-              top: 45,
-              left: 0,
-              right: 0,
-              child: Image.asset(AppImages.person, width: 208, height: 277),
-            ),
-            Positioned(
-              bottom: size.height * 0.35,
-              left: 0,
-              right: 0,
+              height: size.height,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  const SizedBox(height: 45),
+                  Image.asset(
+                    AppImages.person,
+                    width: 208,
+                    height: size.height * 0.3,
+                  ),
+
+                  const SizedBox(height: 20),
                   Image.asset(AppImages.logomini),
+                  const SizedBox(height: 20),
+
                   Padding(
-                    padding: const EdgeInsets.only(left: 70, right: 70),
+                    padding: const EdgeInsets.symmetric(horizontal: 70),
                     child: Text(
                       "Organize seus boletos em um só lugar",
                       style: TextStyles.titleHome,
                       textAlign: TextAlign.center,
                     ),
                   ),
+
+                  const SizedBox(height: 40),
                   Padding(
-                    padding: const EdgeInsets.only(
-                      left: 40,
-                      right: 40,
-                      top: 40,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
                     child: SocialLoginButton(
                       onTap: () {
                         print("Clicou Clicou");
@@ -66,8 +63,8 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
