@@ -32,14 +32,45 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 children: [
                   const SizedBox(height: 45),
-                  Image.asset(
-                    AppImages.person,
-                    width: 208,
-                    height: size.height * 0.3,
+                  Stack(
+                    children: [
+                      Image.asset(
+                        AppImages.person,
+                        width: 208,
+                        height: size.height * 0.3,
+                        fit: BoxFit.scaleDown,
+                      ),
+                      Positioned(
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: Container(
+                          height: 20,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Colors.white.withValues(alpha: .0),
+                                Colors.white.withValues(alpha: .2),
+                                Colors.white.withValues(alpha: .5),
+                                Colors.white.withValues(alpha: .8),
+                                Colors.white,
+                              ],
+                            ),
+                            borderRadius: const BorderRadius.vertical(
+                              bottom: Radius.circular(10),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
 
                   const SizedBox(height: 20),
+
                   Image.asset(AppImages.logomini),
+
                   const SizedBox(height: 20),
 
                   Padding(
@@ -52,6 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
 
                   const SizedBox(height: 40),
+
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 40),
                     child: SocialLoginButton(
