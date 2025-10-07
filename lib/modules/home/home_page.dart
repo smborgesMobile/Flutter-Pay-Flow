@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:learning_project/modules/home/home_controller.dart';
 import 'package:learning_project/shared/themes/app_colors.dart';
 import 'package:learning_project/shared/themes/app_text_styles.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final homeController = HomeController();
+  final pages = [
+    Container(color: Colors.red),
+    Container(color: Colors.blue),
+    Container(color: Colors.green),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +56,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      body: const Center(child: Text("Conteúdo principal aqui")),
+      body: pages[homeController.currentPage],
       bottomNavigationBar: SafeArea(
         top: false,
         child: SizedBox(
@@ -52,13 +65,17 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  homeController.setPage(2);
+                  setState(() {});
+                },
                 icon: const Icon(Icons.home),
                 color: AppColors.primary,
               ),
               GestureDetector(
                 onTap: () {
-                  print("Clicou");
+                  homeController.setPage(0);
+                  setState(() {});
                 },
                 child: Container(
                   width: 56,
@@ -71,7 +88,10 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  homeController.setPage(1);
+                  setState(() {});
+                },
                 icon: const Icon(Icons.description_outlined),
                 color: AppColors.body,
               ),
