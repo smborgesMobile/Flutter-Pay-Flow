@@ -2,24 +2,44 @@ import 'package:flutter/material.dart';
 import 'package:learning_project/shared/themes/app_text_styles.dart';
 
 class LabelButton extends StatelessWidget {
-  final VoidCallback onPressed;
   final String label;
-  final TextStyle? textStyle;
+  final VoidCallback onPressed;
+  final TextStyle style;
   const LabelButton({
-    super.key,
+    Key? key,
     required this.label,
     required this.onPressed,
-    this.textStyle,
-  });
+    required this.style,
+  }) : super(key: key);
+
+  factory LabelButton.heading(
+          {required String label, required VoidCallback onPressed}) =>
+      LabelButton(
+        label: label,
+        onPressed: onPressed,
+        style: TextStyles.buttonHeading,
+      );
+
+  factory LabelButton.primary(
+          {required String label, required VoidCallback onPressed}) =>
+      LabelButton(
+        label: label,
+        onPressed: onPressed,
+        style: TextStyles.buttonPrimary,
+      );
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Expanded(
+        child: Container(
       height: 56,
       child: TextButton(
         onPressed: onPressed,
-        child: Text(label, style: textStyle ?? TextStyles.buttonHeading),
+        child: Text(
+          label,
+          style: style,
+        ),
       ),
-    );
+    ));
   }
 }

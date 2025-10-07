@@ -50,12 +50,12 @@ class BottomSheetWidget extends StatelessWidget {
                 ),
               ),
               Container(height: 1, color: AppColors.stroke),
-              SetButtonsWidget(
-                enablePrimarycolor: true,
-                primaryLabel: primaryLabel,
-                secondaryLabel: secondaryLabel,
-                primaryOnPressed: primaryOnPressed,
-                secondaryOnPressed: secondaryOnPressed,
+              SetLabelButtons(
+                enablePrimaryColor: true,
+                labelPrimary: primaryLabel,
+                labelSecondary: secondaryLabel,
+                onTapPrimary: primaryOnPressed,
+                onTapSecondary: secondaryOnPressed,
               ),
               SizedBox(height: 4),
             ],

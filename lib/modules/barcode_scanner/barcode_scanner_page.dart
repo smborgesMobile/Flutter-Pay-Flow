@@ -79,13 +79,13 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
                   Expanded(child: Container(color: Colors.black)),
                 ],
               ),
-              bottomNavigationBar: SetButtonsWidget(
-                primaryLabel: "Inserir código do boleto",
-                primaryOnPressed: () {
+              bottomNavigationBar: SetLabelButtons(
+                labelPrimary: "Inserir código do boleto",
+                onTapPrimary: () {
                   controller.status = BarcodeScannerStatus.error("Error");
                 },
-                secondaryLabel: "Adicionar da galeria",
-                secondaryOnPressed: controller.scanWithImagePicker,
+                labelSecondary: "Adicionar da galeria",
+                onTapSecondary: controller.scanWithImagePicker,
               ),
             ),
           ),

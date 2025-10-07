@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
-
 import 'barcode_scanner_status.dart';
 
 class BarcodeScannerController {
@@ -18,7 +17,6 @@ class BarcodeScannerController {
   final BarcodeScanner barcodeScanner = BarcodeScanner();
   CameraController? cameraController;
 
-  /// Inicializa as câmeras disponíveis e começa o stream da câmera traseira.
   Future<void> getAvailableCameras() async {
     try {
       final cameras = await availableCameras();
@@ -28,7 +26,7 @@ class BarcodeScannerController {
 
       cameraController = CameraController(
         backCamera,
-        ResolutionPreset.max,
+        ResolutionPreset.medium,
         enableAudio: false,
       );
 
@@ -40,7 +38,6 @@ class BarcodeScannerController {
     }
   }
 
-  /// Realiza a leitura de um código de barras a partir de uma imagem.
   Future<void> scannerBarCode(InputImage inputImage) async {
     try {
       final barcodes = await barcodeScanner.processImage(inputImage);
@@ -64,7 +61,6 @@ class BarcodeScannerController {
     }
   }
 
-  /// Permite ao usuário escolher uma imagem da galeria para escanear.
   Future<void> scanWithImagePicker() async {
     final XFile? file = await ImagePicker().pickImage(
       source: ImageSource.gallery,
@@ -75,10 +71,9 @@ class BarcodeScannerController {
     await scannerBarCode(inputImage);
   }
 
-  /// Ativa o status de câmera disponível e inicia o timeout de 20s.
   void scanWithCamera() {
     status = BarcodeScannerStatus.available();
-    Future.delayed(Duration(seconds: 20)).then((_) {
+    Future.delayed(const Duration(seconds: 20)).then((_) {
       if (!status.hasBarcode) {
         status = BarcodeScannerStatus.error(
           "Tempo de leitura excedido (timeout)",
@@ -87,7 +82,6 @@ class BarcodeScannerController {
     });
   }
 
-  /// Inicia o stream da câmera para processar imagens em tempo real.
   void listenCamera() {
     if (cameraController == null || cameraController!.value.isStreamingImages)
       return;
@@ -96,35 +90,37 @@ class BarcodeScannerController {
       if (!status.stopScanner) {
         try {
           final WriteBuffer allBytes = WriteBuffer();
-          for (Plane plane in cameraImage.planes) {
+          for (final plane in cameraImage.planes) {
             allBytes.putUint8List(plane.bytes);
           }
-          final bytes = allBytes.done().buffer.asUint8List();
 
+          final bytes = allBytes.done().buffer.asUint8List();
           final Size imageSize = Size(
             cameraImage.width.toDouble(),
             cameraImage.height.toDouble(),
           );
 
           final camera = cameraController!.description;
-          final imageRotation =
+          final rotation =
               InputImageRotationValue.fromRawValue(camera.sensorOrientation) ??
               InputImageRotation.rotation0deg;
 
-          final inputImageFormat =
-              InputImageFormatValue.fromRawValue(cameraImage.format.raw) ??
-              InputImageFormat.nv21;
+          // Para evitar o erro "Invalid format of image", garanta um formato compatível
+          final format = Platform.isAndroid
+              ? InputImageFormat.nv21
+              : InputImageFormat.bgra8888;
 
-          final inputImageData = InputImageMetadata(
+          final plane = cameraImage.planes.first;
+          final metadata = InputImageMetadata(
             size: imageSize,
-            rotation: imageRotation,
-            format: inputImageFormat,
-            bytesPerRow: cameraImage.planes[0].bytesPerRow,
+            rotation: rotation,
+            format: format,
+            bytesPerRow: plane.bytesPerRow,
           );
 
           final inputImage = InputImage.fromBytes(
             bytes: bytes,
-            metadata: inputImageData,
+            metadata: metadata,
           );
 
           await scannerBarCode(inputImage);
@@ -135,7 +131,6 @@ class BarcodeScannerController {
     });
   }
 
-  /// Para a câmera e fecha o scanner.
   Future<void> stopCamera() async {
     try {
       await cameraController?.stopImageStream();
@@ -146,7 +141,6 @@ class BarcodeScannerController {
     }
   }
 
-  /// Libera recursos.
   void dispose() {
     statusNotifier.dispose();
     stopCamera();
