@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:learning_project/modules/login/login_controller.dart';
 import 'package:learning_project/shared/themes/app_colors.dart';
 import 'package:learning_project/shared/themes/app_images.dart';
 import 'package:learning_project/shared/themes/app_text_styles.dart';
@@ -13,6 +13,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final controller = LoginController();
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -87,22 +89,7 @@ class _LoginPageState extends State<LoginPage> {
 
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 40),
-                    child: SocialLoginButton(
-                      onTap: () async {
-                        GoogleSignIn _googleSignIn = GoogleSignIn(
-                          scopes: [
-                            "email"
-                          ],
-                        );
-
-                        try {
-                          final response = await _googleSignIn.signIn();
-                          print("SM.BORGES - ${response}");
-                        } catch (error) {
-                              print("SM.BORGES - ${error}");
-                        }
-                      },
-                    ),
+                    child: SocialLoginButton(onTap: controller.googleSignIn),
                   ),
                 ],
               ),
