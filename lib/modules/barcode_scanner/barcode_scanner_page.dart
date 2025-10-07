@@ -51,3 +51,12 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
     );
   }
 }
+
+    // return BottomSheetWidget(
+    //   title: "Não foi possível identificar um código de barras",
+    //   description: "Tentar escanear novamente ou digite o código do seu boleto",
+    //   secondaryLabel: "Digital Novamente",
+    //   primaryLabel: "Escanear Novamente",
+    //   primaryOnPressed: () {},
+    //   secondaryOnPressed: () {},
+    // );
