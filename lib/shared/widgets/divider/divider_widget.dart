@@ -4,9 +4,9 @@ import 'package:learning_project/shared/themes/app_colors.dart';
 class DividerWidget extends StatelessWidget {
   final double height;
   const DividerWidget({
-    Key? key,
+    super.key,
     required this.height,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

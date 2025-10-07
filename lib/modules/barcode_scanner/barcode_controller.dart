@@ -83,8 +83,9 @@ class BarcodeScannerController {
   }
 
   void listenCamera() {
-    if (cameraController == null || cameraController!.value.isStreamingImages)
+    if (cameraController == null || cameraController!.value.isStreamingImages) {
       return;
+    }
 
     cameraController!.startImageStream((CameraImage cameraImage) async {
       if (!status.stopScanner) {

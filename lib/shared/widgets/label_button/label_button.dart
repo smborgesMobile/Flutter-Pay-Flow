@@ -6,11 +6,11 @@ class LabelButton extends StatelessWidget {
   final VoidCallback onPressed;
   final TextStyle style;
   const LabelButton({
-    Key? key,
+    super.key,
     required this.label,
     required this.onPressed,
     required this.style,
-  }) : super(key: key);
+  });
 
   factory LabelButton.heading(
           {required String label, required VoidCallback onPressed}) =>

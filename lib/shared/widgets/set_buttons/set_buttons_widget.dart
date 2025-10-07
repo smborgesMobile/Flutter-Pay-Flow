@@ -11,14 +11,14 @@ class SetLabelButtons extends StatelessWidget {
   final bool enablePrimaryColor;
   final bool enableSecondaryColor;
   const SetLabelButtons({
-    Key? key,
+    super.key,
     required this.labelPrimary,
     required this.onTapPrimary,
     required this.labelSecondary,
     required this.onTapSecondary,
     this.enablePrimaryColor = false,
     this.enableSecondaryColor = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
