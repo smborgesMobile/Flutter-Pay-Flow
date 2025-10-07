@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_ml_kit/google_ml_kit.dart';
+import 'package:learning_project/modules/barcode_scanner/barcode_scanner_page.dart';
 import 'package:learning_project/modules/home/home_page.dart';
 import 'package:learning_project/modules/login/login_page.dart';
 import 'package:learning_project/modules/splash/splash_page.dart';
@@ -17,6 +19,7 @@ class AppWidget extends StatelessWidget {
         "/home": (context) => HomePage(),
         "/splash": (context) => SplashPage(),
         "/login": (context) => LoginPage(),
+        "/barcode_scanner": (context) => BarcodeScannerPage(),
       },
     );
   }
