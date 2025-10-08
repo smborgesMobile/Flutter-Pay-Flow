@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learning_project/modules/home/home_controller.dart';
+import 'package:learning_project/modules/invoice/invoice_page.dart';
 import 'package:learning_project/shared/themes/app_colors.dart';
 import 'package:learning_project/shared/themes/app_text_styles.dart';
 
@@ -14,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   final homeController = HomeController();
   final pages = [
     Container(color: Colors.red),
-    Container(color: Colors.blue),
+    InvoicePage(),
     Container(color: Colors.green),
   ];
 
@@ -22,41 +23,44 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(152),
+        preferredSize: const Size.fromHeight(120),
         child: Container(
-          height: 152,
+          height: 120,
           color: AppColors.primary,
-          child: Center(
-            child: ListTile(
-              title: Text.rich(
-                TextSpan(
-                  text: "Olá, ",
-                  style: TextStyles.titleRegular,
-                  children: [
-                    TextSpan(
-                      text: "Gabul",
-                      style: TextStyles.titleBoldBackground,
-                    ),
-                  ],
+          child: Padding(
+            padding: const EdgeInsets.only(top: 40),
+            child: Center(
+              child: ListTile(
+                title: Text.rich(
+                  TextSpan(
+                    text: "Olá, ",
+                    style: TextStyles.titleRegular,
+                    children: [
+                      TextSpan(
+                        text: "Gabul",
+                        style: TextStyles.titleBoldBackground,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              subtitle: Text(
-                "Mantenha suas contas em dia",
-                style: TextStyles.captionShape,
-              ),
-              trailing: Container(
-                width: 48,
-                height: 48,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(5),
+                subtitle: Text(
+                  "Mantenha suas contas em dia",
+                  style: TextStyles.captionShape,
+                ),
+                trailing: Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                 ),
               ),
             ),
           ),
         ),
       ),
-      body: pages[homeController.currentPage],
+      body: Stack(children: [pages[homeController.currentPage]]),
       bottomNavigationBar: SafeArea(
         top: false,
         child: SizedBox(
