@@ -22,7 +22,7 @@ class AuthController {
     return;
   }
 
-  Future<void> currentUser(BuildContext context) async {
+    Future<void> currentUser(BuildContext context) async {
     final instance = await SharedPreferences.getInstance();
     if (instance.containsKey("user")) {
       final json = instance.get("user") as String;

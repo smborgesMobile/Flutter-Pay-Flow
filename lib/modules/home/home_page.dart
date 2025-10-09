@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:learning_project/modules/bill_extract/bill_extract_page.dart';
 import 'package:learning_project/modules/home/home_controller.dart';
 import 'package:learning_project/modules/invoice/invoice_page.dart';
+import 'package:learning_project/shared/models/user_model.dart';
 import 'package:learning_project/shared/themes/app_colors.dart';
 import 'package:learning_project/shared/themes/app_text_styles.dart';
+import 'package:learning_project/shared/widgets/profile_image/profile_image_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,8 +15,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  UserModel? user;
   final homeController = HomeController();
   final pages = [InvoicePage(), BillExtractPage()];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCurrentUser();
+  }
+
+  Future<void> _loadCurrentUser() async {
+    user = await homeController.currentUser(context);
+    setState(() {});
+    if (user != null) {
+      print("Usuário carregado: ${user!.name}");
+    } else {
+      print("Nenhum usuário encontrado");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                     style: TextStyles.titleRegular,
                     children: [
                       TextSpan(
-                        text: "Gabul",
+                        text: user?.name ?? "Avatar",
                         style: TextStyles.titleBoldBackground,
                       ),
                     ],
@@ -44,13 +63,11 @@ class _HomePageState extends State<HomePage> {
                   "Mantenha suas contas em dia",
                   style: TextStyles.captionShape,
                 ),
-                trailing: Container(
+                trailing: ProfileImageWidget(
+                  imageUrl: user?.photoUrl ?? "", // URL da imagem
                   width: 48,
                   height: 48,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
