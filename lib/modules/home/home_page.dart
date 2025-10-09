@@ -28,11 +28,6 @@ class _HomePageState extends State<HomePage> {
   Future<void> _loadCurrentUser() async {
     user = await homeController.currentUser(context);
     setState(() {});
-    if (user != null) {
-      print("Usuário carregado: ${user!.name}");
-    } else {
-      print("Nenhum usuário encontrado");
-    }
   }
 
   @override
