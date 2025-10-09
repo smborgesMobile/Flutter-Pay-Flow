@@ -98,10 +98,13 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
                   child: BottomSheetWidget(
                     primaryLabel: "Escanear novamente",
                     primaryOnPressed: () {
-                      controller.scanWithCamera();
+                      Navigator.pushNamed(context, '/barcode_scanner');
+                      //controller.scanWithCamera();
                     },
                     secondaryLabel: "Digitar código",
-                    secondaryOnPressed: () {},
+                    secondaryOnPressed: () {
+                      Navigator.pushNamed(context, '/barcode_scanner');
+                    },
                     title: "Não foi possível identificar um código de barras.",
                     description:
                         "Tente escanear novamente ou digite o código do seu boleto.",

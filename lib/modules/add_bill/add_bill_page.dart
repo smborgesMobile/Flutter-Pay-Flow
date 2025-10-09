@@ -59,7 +59,9 @@ class AddBillPage extends StatelessWidget {
             Spacer(),
             SetLabelButtons(
               labelPrimary: "Cancelar",
-              onTapPrimary: () {},
+              onTapPrimary: () {
+                Navigator.pop(context);
+              },
               labelSecondary: "Cadastrar",
               onTapSecondary: () {},
               enablePrimaryColor: false,
