@@ -7,7 +7,7 @@ import 'package:learning_project/shared/widgets/add_bill_field/money_input_forma
 class AddBillFieldWidget extends StatefulWidget {
   final String hint;
   final IconData icon;
-  final String fieldType; // Tipo de campo
+  final String fieldType;
 
   const AddBillFieldWidget({
     super.key,
