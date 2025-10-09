@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learning_project/modules/bill_extract/bill_extract_page.dart';
 import 'package:learning_project/modules/home/home_controller.dart';
 import 'package:learning_project/modules/invoice/invoice_page.dart';
 import 'package:learning_project/shared/themes/app_colors.dart';
@@ -14,9 +15,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final homeController = HomeController();
   final pages = [
-    Container(color: Colors.red),
     InvoicePage(),
-    Container(color: Colors.green),
+    BillExtractPage(),
   ];
 
   @override
@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               IconButton(
                 onPressed: () {
-                  homeController.setPage(2);
+                  homeController.setPage(0);
                   setState(() {});
                 },
                 icon: const Icon(Icons.home),
