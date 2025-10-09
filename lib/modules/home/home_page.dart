@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                   setState(() {});
                 },
                 icon: const Icon(Icons.description_outlined),
-                color: AppColors.body,
+                color: AppColors.stroke,
               ),
             ],
           ),
