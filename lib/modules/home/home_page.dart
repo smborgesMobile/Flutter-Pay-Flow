@@ -14,10 +14,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final homeController = HomeController();
-  final pages = [
-    InvoicePage(),
-    BillExtractPage(),
-  ];
+  final pages = [InvoicePage(), BillExtractPage()];
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +71,9 @@ class _HomePageState extends State<HomePage> {
                   setState(() {});
                 },
                 icon: const Icon(Icons.home),
-                color: AppColors.primary,
+                color: homeController.currentPage == 0
+                    ? AppColors.primary
+                    : AppColors.stroke,
               ),
               GestureDetector(
                 onTap: () {
@@ -96,7 +95,9 @@ class _HomePageState extends State<HomePage> {
                   setState(() {});
                 },
                 icon: const Icon(Icons.description_outlined),
-                color: AppColors.stroke,
+                color: homeController.currentPage == 1
+                    ? AppColors.primary
+                    : AppColors.stroke,
               ),
             ],
           ),
