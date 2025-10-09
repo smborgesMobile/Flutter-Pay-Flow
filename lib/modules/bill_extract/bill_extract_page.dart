@@ -16,7 +16,10 @@ class BillExtractPage extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 32, left: 24),
-                child: Text("Meus extratos", style: TextStyles.titleBoldHeading),
+                child: Text(
+                  "Meus extratos",
+                  style: TextStyles.titleBoldHeading,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 32, right: 24),
