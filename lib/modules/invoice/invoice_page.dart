@@ -1,45 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:learning_project/blocs/bill_cubit.dart';
+import 'package:learning_project/shared/models/bill_model.dart';
 import 'package:learning_project/shared/themes/app_colors.dart';
 import 'package:learning_project/shared/themes/app_text_styles.dart';
 import 'package:learning_project/shared/widgets/bar_code_counter/bar_code_counter.dart';
-import 'package:learning_project/shared/widgets/invoid_list/invoice_list_widget.dart';
-import '../../shared/models/invoice_model.dart' show Invoice;
+import 'package:learning_project/shared/widgets/invoice_list/invoice_list_widget.dart';
 
 class InvoicePage extends StatefulWidget {
-  final List<Invoice> invoices = [
-    Invoice(
-      name: "Fatura de Abril",
-      expiredData: "Venceu em 01/05",
-      currency: "R\$ 200,00",
-    ),
-    Invoice(
-      name: "Fatura de Maio",
-      expiredData: "Vence em 02/06",
-      currency: "R\$ 150,00",
-    ),
-    Invoice(
-      name: "Fatura de Junho",
-      expiredData: "Vence em 15/07",
-      currency: "R\$ 300,00",
-    ),
-    Invoice(
-      name: "Fatura de Junho",
-      expiredData: "Vence em 15/07",
-      currency: "R\$ 300,00",
-    ),
-    Invoice(
-      name: "Fatura de Junho",
-      expiredData: "Vence em 15/07",
-      currency: "R\$ 300,00",
-    ),
-    Invoice(
-      name: "Fatura de Junho",
-      expiredData: "Vence em 15/07",
-      currency: "R\$ 300,00",
-    ),
-  ];
-
-  InvoicePage({super.key});
+  const InvoicePage({super.key});
 
   @override
   State<InvoicePage> createState() => _InvoicePageState();
@@ -75,7 +44,19 @@ class _InvoicePageState extends State<InvoicePage> {
             padding: const EdgeInsets.all(24),
             child: Divider(height: 1, color: AppColors.stroke, thickness: 1),
           ),
-         InvoiceListWidget()
+
+          BlocBuilder<BillCubit, List<Bill>>(
+            builder: (context, bills) {
+              if (bills.isEmpty) {
+                return const Padding(
+                  padding: EdgeInsets.all(24),
+                  child: Center(child: Text("Nenhum boleto encontrado.")),
+                );
+              }
+
+              return InvoiceListWidget(invoices: bills);
+            },
+          ),
         ],
       ),
     );

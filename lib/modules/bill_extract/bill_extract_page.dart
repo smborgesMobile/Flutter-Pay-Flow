@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:learning_project/blocs/bill_cubit.dart';
+import 'package:learning_project/shared/models/bill_model.dart';
 import 'package:learning_project/shared/themes/app_colors.dart';
 import 'package:learning_project/shared/themes/app_text_styles.dart';
-import 'package:learning_project/shared/widgets/invoid_list/invoice_list_widget.dart';
+import 'package:learning_project/shared/widgets/invoice_list/invoice_list_widget.dart';
 
 class BillExtractPage extends StatelessWidget {
   const BillExtractPage({super.key});
@@ -30,7 +33,18 @@ class BillExtractPage extends StatelessWidget {
           SizedBox(height: 16),
           Divider(height: 1, thickness: 1, color: AppColors.stroke),
           SizedBox(height: 32),
-          InvoiceListWidget(),
+          BlocBuilder<BillCubit, List<Bill>>(
+            builder: (context, bills) {
+              if (bills.isEmpty) {
+                return const Padding(
+                  padding: EdgeInsets.all(24),
+                  child: Center(child: Text("Nenhum boleto encontrado.")),
+                );
+              }
+
+              return InvoiceListWidget(invoices: bills);
+            },
+          ),
         ],
       ),
     );

@@ -19,7 +19,7 @@ class AddBillPage extends StatelessWidget {
     final billNameController = TextEditingController();
     final valueControlelr = TextEditingController();
     final codeController = TextEditingController();
-    final cubit = BillCubit();
+    final cubit = context.read<BillCubit>();
 
     return SafeArea(
       top: false,
