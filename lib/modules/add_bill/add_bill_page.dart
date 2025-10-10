@@ -96,6 +96,8 @@ class AddBillPage extends StatelessWidget {
                   dateController.clear();
                   valueControlelr.clear();
                   codeController.clear();
+
+                  Navigator.pop(context);
                 }
               },
               enablePrimaryColor: false,
