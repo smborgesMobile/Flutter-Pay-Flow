@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:learning_project/shared/themes/app_colors.dart';
 import 'package:learning_project/shared/themes/app_text_styles.dart';
 import 'package:learning_project/shared/widgets/add_bill_field/money_input_formatter.dart';
@@ -8,12 +7,14 @@ class AddBillFieldWidget extends StatefulWidget {
   final String hint;
   final IconData icon;
   final String fieldType;
+  final TextEditingController controller;
 
   const AddBillFieldWidget({
     super.key,
     required this.hint,
     required this.icon,
     required this.fieldType,
+    required this.controller,
   });
 
   @override
@@ -21,24 +22,14 @@ class AddBillFieldWidget extends StatefulWidget {
 }
 
 class _AddBillFieldWidgetState extends State<AddBillFieldWidget> {
-  late TextEditingController _controller;
-
   @override
   void initState() {
     super.initState();
-
-    if (widget.fieldType == "date") {
-      _controller = MaskedTextController(mask: '00/00/0000');
-    } else if (widget.fieldType == "value") {
-      _controller = TextEditingController();
-    } else {
-      _controller = TextEditingController();
-    }
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    widget.controller.dispose();
     super.dispose();
   }
 
@@ -56,7 +47,7 @@ class _AddBillFieldWidgetState extends State<AddBillFieldWidget> {
             Container(width: 1, height: 48, color: AppColors.input),
             Expanded(
               child: TextField(
-                controller: _controller,
+                controller: widget.controller,
                 style: TextStyles.captionBody,
                 keyboardType: (widget.fieldType == "code")
                     ? TextInputType.number
