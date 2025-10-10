@@ -3,16 +3,24 @@ class Bill {
   final String date;
   final String value;
   final String code;
+  bool isPaid;
 
   Bill({
     required this.nome,
     required this.date,
     required this.value,
     required this.code,
+    this.isPaid = false,
   });
 
   Map<String, dynamic> toJson() {
-    return {'name': nome, 'date': date, 'valor': value, 'code': code};
+    return {
+      'name': nome,
+      'date': date,
+      'valor': value,
+      'code': code,
+      'isPaid': isPaid,
+    };
   }
 
   static Bill fromJson(Map<String, dynamic> json) {
@@ -21,6 +29,7 @@ class Bill {
       date: json["date"],
       value: json["valor"],
       code: json["code"],
+      isPaid: json["isPaid"] ?? false,
     );
   }
 }

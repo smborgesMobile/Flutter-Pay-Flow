@@ -19,17 +19,39 @@ class BillCubit extends Cubit<List<Bill>> {
   Future<void> loadBills() async {
     final prefs = await SharedPreferences.getInstance();
     List<String>? billsString = prefs.getStringList('bills');
-    print("SM.BORGES - BILLS ${billsString}");
     if (billsString != null && billsString.isNotEmpty) {
-      print("SM.BORGES - IS NO NULL ${billsString}");
-
       List<Bill> loadedBills = billsString
           .map((billJson) => Bill.fromJson(jsonDecode(billJson)))
           .toList();
 
-      print("SM.BORGES - LOADED BILLS ${loadedBills}");
-
       emit(loadedBills);
+    }
+  }
+
+  List<Bill> getPaidBills() {
+    return state.where((bill) => bill.isPaid).toList();
+  }
+
+  List<Bill> getUnpaidBills() {
+    return state.where((bill) => !bill.isPaid).toList();
+  }
+
+  Future<void> markBillAsPaid(Bill bill) async {
+    final index = state.indexOf(bill);
+    if (index != -1) {
+      final updatedBill = Bill(
+        nome: bill.nome,
+        date: bill.date,
+        value: bill.value,
+        code: bill.code,
+        isPaid: true,
+      );
+
+      final prefs = await SharedPreferences.getInstance();
+      List<String> bills = prefs.getStringList("bills") ?? [];
+      bills[index] = jsonEncode(updatedBill.toJson());
+      await prefs.setStringList("bills", bills);
+      emit([...state]..[index] = updatedBill);
     }
   }
 }

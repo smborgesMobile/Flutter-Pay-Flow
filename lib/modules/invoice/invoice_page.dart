@@ -47,14 +47,17 @@ class _InvoicePageState extends State<InvoicePage> {
 
           BlocBuilder<BillCubit, List<Bill>>(
             builder: (context, bills) {
-              if (bills.isEmpty) {
+              List<Bill> getUnpaidBills = context
+                  .read<BillCubit>()
+                  .getUnpaidBills();
+              if (getUnpaidBills.isEmpty) {
                 return const Padding(
                   padding: EdgeInsets.all(24),
                   child: Center(child: Text("Nenhum boleto encontrado.")),
                 );
               }
 
-              return InvoiceListWidget(invoices: bills);
+              return InvoiceListWidget(invoices: getUnpaidBills);
             },
           ),
         ],
