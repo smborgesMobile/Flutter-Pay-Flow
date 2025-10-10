@@ -13,8 +13,8 @@ class InvoiceListWidget extends StatelessWidget {
       children: invoices
           .map(
             (invoice) => InvoiceItemWidget(
-              name: invoice.code,
-              expiredData: invoice.date,
+              name: invoice.nome,
+              expiredData: "Vence em ${invoice.date}",
               currency: invoice.value,
             ),
           )

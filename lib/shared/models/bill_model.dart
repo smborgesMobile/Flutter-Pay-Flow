@@ -19,7 +19,7 @@ class Bill {
     return Bill(
       nome: json["name"],
       date: json["date"],
-      value: json["value"],
+      value: json["valor"],
       code: json["code"],
     );
   }
