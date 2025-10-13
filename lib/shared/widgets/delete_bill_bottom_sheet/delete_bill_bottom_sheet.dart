@@ -87,7 +87,9 @@ class DeleteBillBottomSheet extends StatelessWidget {
             ),
             Divider(height: 24, color: AppColors.stroke, thickness: 1),
             SizedBox(width: 16),
-            DeleteTextButton()
+            DeleteTextButton(billTitle: billTitle, onDeleteButtonPressed: (billTitle) {
+              
+            },)
           ],
         ),
       ),
