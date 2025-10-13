@@ -4,8 +4,13 @@ import 'package:learning_project/shared/widgets/invoice_item/invoice_item_widget
 
 class InvoiceListWidget extends StatelessWidget {
   final List<Bill> invoices;
-
-  const InvoiceListWidget({super.key, required this.invoices});
+  final Function(Bill) onItemTap;
+  
+  const InvoiceListWidget({
+    super.key, 
+    required this.invoices,
+    required this.onItemTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +21,7 @@ class InvoiceListWidget extends StatelessWidget {
               name: invoice.nome,
               expiredData: "Vence em ${invoice.date}",
               currency: invoice.value,
+              onTap: () => onItemTap(invoice),
             ),
           )
           .toList(),

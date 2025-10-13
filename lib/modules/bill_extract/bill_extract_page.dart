@@ -43,7 +43,12 @@ class BillExtractPage extends StatelessWidget {
                 );
               }
 
-              return InvoiceListWidget(invoices: paidBills);
+              return InvoiceListWidget(
+                invoices: paidBills,
+                onItemTap: (bill) {
+                  
+                },
+              );
             },
           ),
         ],

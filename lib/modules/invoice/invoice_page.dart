@@ -6,6 +6,7 @@ import 'package:learning_project/shared/themes/app_colors.dart';
 import 'package:learning_project/shared/themes/app_text_styles.dart';
 import 'package:learning_project/shared/widgets/bar_code_counter/bar_code_counter.dart';
 import 'package:learning_project/shared/widgets/invoice_list/invoice_list_widget.dart';
+import 'package:learning_project/shared/widgets/delete_bill_bottom_sheet/delete_bill_bottom_sheet.dart';
 
 class InvoicePage extends StatefulWidget {
   const InvoicePage({super.key});
@@ -57,7 +58,37 @@ class _InvoicePageState extends State<InvoicePage> {
                 );
               }
 
-              return InvoiceListWidget(invoices: getUnpaidBills);
+              return InvoiceListWidget(
+                invoices: getUnpaidBills,
+                onItemTap: (bill) async {
+                  final bool? result = await showModalBottomSheet<bool>(
+                    context: context,
+                    isScrollControlled: true,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(20),
+                      ),
+                    ),
+                    builder: (BuildContext context) {
+                      return DeleteBillBottomSheet(
+                        billTitle: bill.nome,
+                        billValue: bill.value,
+                        onConfirm: () {
+                          Navigator.of(context).pop(true);
+                        },
+                        onCancel: () {
+                          Navigator.of(context).pop();
+                        },
+                      );
+                    },
+                  );
+
+                  if (result == true) {
+                    // Usuário confirmou que o boleto foi pago
+                    // Atualize seu estado ou banco de dados
+                  }
+                },
+              );
             },
           ),
         ],
