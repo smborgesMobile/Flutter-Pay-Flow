@@ -118,4 +118,10 @@ class TextStyles {
     fontWeight: FontWeight.w600,
     color: AppColors.body,
   );
+  static final deleteLabel = GoogleFonts.inter(
+    fontSize: 15,
+    fontWeight: FontWeight.w400,
+    height: 1.0,
+    color: AppColors.delete,
+  );
 }

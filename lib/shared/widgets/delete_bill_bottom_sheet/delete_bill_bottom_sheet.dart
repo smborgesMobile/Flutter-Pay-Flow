@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learning_project/shared/themes/app_colors.dart';
 import 'package:learning_project/shared/themes/app_text_styles.dart';
+import 'package:learning_project/shared/widgets/delete_text_button/delete_text_button.dart';
 
 class DeleteBillBottomSheet extends StatelessWidget {
   final VoidCallback onConfirm;
@@ -33,13 +34,12 @@ class DeleteBillBottomSheet extends StatelessWidget {
                     const TextSpan(text: 'O boleto '),
                     TextSpan(
                       text: billTitle,
-                      style:
-                          TextStyles.titleBoldHeading,
+                      style: TextStyles.titleBoldHeading,
                     ),
                     const TextSpan(text: ' no valor de '),
                     TextSpan(
                       text: billValue,
-                      style: TextStyles.titleBoldHeading, 
+                      style: TextStyles.titleBoldHeading,
                     ),
                     const TextSpan(text: ' foi pago ?'),
                   ],
@@ -85,6 +85,9 @@ class DeleteBillBottomSheet extends StatelessWidget {
                 ),
               ],
             ),
+            Divider(height: 24, color: AppColors.stroke, thickness: 1),
+            SizedBox(width: 16),
+            DeleteTextButton()
           ],
         ),
       ),
