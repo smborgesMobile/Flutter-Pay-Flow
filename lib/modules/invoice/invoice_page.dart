@@ -79,6 +79,9 @@ class _InvoicePageState extends State<InvoicePage> {
                         onCancel: () {
                           Navigator.of(context).pop();
                         },
+                        onDelete: () {
+                          Navigator.of(context).pop(false);
+                        },
                       );
                     },
                   );

@@ -6,6 +6,7 @@ import 'package:learning_project/shared/widgets/delete_text_button/delete_text_b
 class DeleteBillBottomSheet extends StatelessWidget {
   final VoidCallback onConfirm;
   final VoidCallback onCancel;
+  final VoidCallback onDelete;
   final String billTitle;
   final String billValue;
 
@@ -15,6 +16,7 @@ class DeleteBillBottomSheet extends StatelessWidget {
     required this.onCancel,
     required this.billTitle,
     required this.billValue,
+     required this.onDelete,
   });
 
   @override
@@ -26,7 +28,7 @@ class DeleteBillBottomSheet extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 70, right: 70),
+              padding: const EdgeInsets.only(left: 70, right: 70, top: 24),
               child: Text.rich(
                 TextSpan(
                   style: TextStyles.titleHeading,
@@ -88,7 +90,7 @@ class DeleteBillBottomSheet extends StatelessWidget {
             Divider(height: 24, color: AppColors.stroke, thickness: 1),
             SizedBox(width: 16),
             DeleteTextButton(billTitle: billTitle, onDeleteButtonPressed: (billTitle) {
-              
+              onDelete();
             },)
           ],
         ),
