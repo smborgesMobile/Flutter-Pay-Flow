@@ -1,31 +1,33 @@
-import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learning_project/shared/models/bill_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:learning_project/domain/usecases/add_bill.dart';
+import 'package:learning_project/domain/usecases/get_bills.dart';
+import 'package:learning_project/domain/usecases/update_bill.dart';
+import 'package:learning_project/domain/usecases/delete_bill.dart';
 
 class BillCubit extends Cubit<List<Bill>> {
-  BillCubit() : super([]) {
+  final GetBills getBillsUsecase;
+  final AddBill addBillUsecase;
+  final UpdateBill updateBillUsecase;
+  final DeleteBill deleteBillUsecase;
+
+  BillCubit({
+    required this.getBillsUsecase,
+    required this.addBillUsecase,
+    required this.updateBillUsecase,
+    required this.deleteBillUsecase,
+  }) : super([]) {
     loadBills();
   }
 
   Future<void> addBill(Bill bill) async {
-    final prefs = await SharedPreferences.getInstance();
-    List<String> bills = prefs.getStringList("bills") ?? [];
-    bills.add(jsonEncode(bill.toJson()));
-    await prefs.setStringList("bills", bills);
+    await addBillUsecase.call(bill);
     emit([...state, bill]);
   }
 
   Future<void> loadBills() async {
-    final prefs = await SharedPreferences.getInstance();
-    List<String>? billsString = prefs.getStringList('bills');
-    if (billsString != null && billsString.isNotEmpty) {
-      List<Bill> loadedBills = billsString
-          .map((billJson) => Bill.fromJson(jsonDecode(billJson)))
-          .toList();
-
-      emit(loadedBills);
-    }
+    final bills = await getBillsUsecase.call();
+    emit(bills);
   }
 
   List<Bill> getPaidBills() {
@@ -37,59 +39,22 @@ class BillCubit extends Cubit<List<Bill>> {
   }
 
   Future<void> markBillAsPaid(Bill bill) async {
-    final index = state.indexWhere((b) => b.code == bill.code);
-    if (index != -1) {
-      final updatedBill = Bill(
-        nome: bill.nome,
-        date: bill.date,
-        value: bill.value,
-        code: bill.code,
-        isPaid: true,
-      );
+    final updated = Bill(
+      nome: bill.nome,
+      date: bill.date,
+      value: bill.value,
+      code: bill.code,
+      isPaid: true,
+    );
+    await updateBillUsecase.call(updated);
 
-      final prefs = await SharedPreferences.getInstance();
-      List<String> bills = prefs.getStringList("bills") ?? [];
-
-      // Update shared preferences if the stored list aligns with our state indices.
-      if (index >= 0 && index < bills.length) {
-        bills[index] = jsonEncode(updatedBill.toJson());
-        await prefs.setStringList("bills", bills);
-      } else {
-        // Fallback: rebuild the prefs list from the current state and update the item.
-        bills = state.map((b) => jsonEncode(b.toJson())).toList();
-        if (index >= 0 && index < bills.length) {
-          bills[index] = jsonEncode(updatedBill.toJson());
-          await prefs.setStringList("bills", bills);
-        }
-      }
-
-      final newState = List<Bill>.from(state);
-      newState[index] = updatedBill;
-      emit(newState);
-    }
+    final newState = state.map((b) => b.code == bill.code ? updated : b).toList();
+    emit(newState);
   }
 
   Future<void> deleteBill(Bill bill) async {
-    // Use the bill code to locate the correct item
-    final index = state.indexWhere((b) => b.code == bill.code);
-    if (index != -1) {
-      final prefs = await SharedPreferences.getInstance();
-      List<String> bills = prefs.getStringList("bills") ?? [];
-      if (index >= 0 && index < bills.length) {
-        bills.removeAt(index);
-        await prefs.setStringList("bills", bills);
-      } else {
-        // Fallback: rebuild prefs from state and remove
-        bills = state.map((b) => jsonEncode(b.toJson())).toList();
-        if (index >= 0 && index < bills.length) {
-          bills.removeAt(index);
-          await prefs.setStringList("bills", bills);
-        }
-      }
-
-      final newState = List<Bill>.from(state);
-      newState.removeAt(index);
-      emit(newState);
-    }
+    await deleteBillUsecase.call(bill.code);
+    final newState = state.where((b) => b.code != bill.code).toList();
+    emit(newState);
   }
 }
