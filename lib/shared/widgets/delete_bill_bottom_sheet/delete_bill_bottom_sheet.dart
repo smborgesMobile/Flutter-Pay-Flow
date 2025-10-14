@@ -57,7 +57,7 @@ class DeleteBillBottomSheet extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: ElevatedButton(
-                    onPressed: onCancel,
+                    onPressed: onConfirm,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,
                       shape: RoundedRectangleBorder(
@@ -73,7 +73,7 @@ class DeleteBillBottomSheet extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: ElevatedButton(
-                    onPressed: onConfirm,
+                    onPressed: onCancel,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.shape,
                       shape: RoundedRectangleBorder(

@@ -37,7 +37,7 @@ class BillCubit extends Cubit<List<Bill>> {
   }
 
   Future<void> markBillAsPaid(Bill bill) async {
-    final index = state.indexOf(bill);
+    final index = state.indexWhere((b) => b.code == bill.code);
     if (index != -1) {
       final updatedBill = Bill(
         nome: bill.nome,
@@ -49,9 +49,47 @@ class BillCubit extends Cubit<List<Bill>> {
 
       final prefs = await SharedPreferences.getInstance();
       List<String> bills = prefs.getStringList("bills") ?? [];
-      bills[index] = jsonEncode(updatedBill.toJson());
-      await prefs.setStringList("bills", bills);
-      emit([...state]..[index] = updatedBill);
+
+      // Update shared preferences if the stored list aligns with our state indices.
+      if (index >= 0 && index < bills.length) {
+        bills[index] = jsonEncode(updatedBill.toJson());
+        await prefs.setStringList("bills", bills);
+      } else {
+        // Fallback: rebuild the prefs list from the current state and update the item.
+        bills = state.map((b) => jsonEncode(b.toJson())).toList();
+        if (index >= 0 && index < bills.length) {
+          bills[index] = jsonEncode(updatedBill.toJson());
+          await prefs.setStringList("bills", bills);
+        }
+      }
+
+      final newState = List<Bill>.from(state);
+      newState[index] = updatedBill;
+      emit(newState);
+    }
+  }
+
+  Future<void> deleteBill(Bill bill) async {
+    // Use the bill code to locate the correct item
+    final index = state.indexWhere((b) => b.code == bill.code);
+    if (index != -1) {
+      final prefs = await SharedPreferences.getInstance();
+      List<String> bills = prefs.getStringList("bills") ?? [];
+      if (index >= 0 && index < bills.length) {
+        bills.removeAt(index);
+        await prefs.setStringList("bills", bills);
+      } else {
+        // Fallback: rebuild prefs from state and remove
+        bills = state.map((b) => jsonEncode(b.toJson())).toList();
+        if (index >= 0 && index < bills.length) {
+          bills.removeAt(index);
+          await prefs.setStringList("bills", bills);
+        }
+      }
+
+      final newState = List<Bill>.from(state);
+      newState.removeAt(index);
+      emit(newState);
     }
   }
 }

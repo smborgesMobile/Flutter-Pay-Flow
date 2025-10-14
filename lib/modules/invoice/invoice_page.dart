@@ -18,6 +18,7 @@ class InvoicePage extends StatefulWidget {
 class _InvoicePageState extends State<InvoicePage> {
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<BillCubit>();
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -75,12 +76,14 @@ class _InvoicePageState extends State<InvoicePage> {
                         billValue: bill.value,
                         onConfirm: () {
                           Navigator.of(context).pop(true);
+                          cubit.markBillAsPaid(bill);
                         },
                         onCancel: () {
                           Navigator.of(context).pop();
                         },
                         onDelete: () {
                           Navigator.of(context).pop(false);
+                          cubit.deleteBill(bill);
                         },
                       );
                     },
