@@ -22,6 +22,14 @@ Um projeto de aprendizado em Flutter que implementa uma **lista de boletos**, pe
 
 ---
 
+
+## 📸 Screenshots
+
+<p align="left">
+  <img src="https://github.com/user-attachments/assets/bee85c78-b194-4148-9af5-b460e7b1a757" height="400" style="margin-right: 20px;" />
+  <img src="https://github.com/user-attachments/assets/00c07440-613b-44f8-95df-3db22ad00ab3" height="400" />
+</p>
+
 ## 📁 Estrutura de Pastas (Clean Architecture)
 
 ```plaintext
