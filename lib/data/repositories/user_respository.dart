@@ -9,7 +9,12 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<List<UserModel>> getUsers() async {
-    Response response = await get(Uri.parse(userUrl));
+    final Map<String, String> customHeaders = {
+      'Content-Type': 'application/json',
+      'x-api-key': 'reqres-free-v1',
+    };
+
+    Response response = await get(Uri.parse(userUrl), headers: customHeaders);
     if (response.statusCode == 200) {
       final List<UserModel> users = jsonDecode(
         response.body,
