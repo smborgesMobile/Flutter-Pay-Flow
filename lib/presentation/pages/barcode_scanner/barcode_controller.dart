@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
-import 'barcode_scanner_status.dart';
+import 'package:learning_project/presentation/pages/barcode_scanner/barcode_scanner_status.dart';
 
 class BarcodeScannerController {
   final statusNotifier = ValueNotifier<BarcodeScannerStatus>(
@@ -106,7 +106,6 @@ class BarcodeScannerController {
               InputImageRotationValue.fromRawValue(camera.sensorOrientation) ??
               InputImageRotation.rotation0deg;
 
-          // Para evitar o erro "Invalid format of image", garanta um formato compatível
           final format = Platform.isAndroid
               ? InputImageFormat.nv21
               : InputImageFormat.bgra8888;

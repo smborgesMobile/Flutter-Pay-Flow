@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learning_project/modules/login/login_controller.dart';
+import 'package:learning_project/presentation/pages/login/login_controller.dart';
 import 'package:learning_project/shared/themes/app_colors.dart';
 import 'package:learning_project/shared/themes/app_images.dart';
 import 'package:learning_project/shared/themes/app_text_styles.dart';
@@ -79,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 70),
                     child: Text(
-                      "Organize seus boletos em um só lugar",
+                      "Organize seus boletos em um s\u00f3 lugar",
                       style: TextStyles.titleHome,
                       textAlign: TextAlign.center,
                     ),

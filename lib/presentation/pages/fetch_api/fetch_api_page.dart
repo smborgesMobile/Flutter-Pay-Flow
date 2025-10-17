@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:learning_project/blocs/user_bloc.dart';
-import 'package:learning_project/blocs/user_event.dart';
-import 'package:learning_project/blocs/user_state.dart';
+import 'package:learning_project/presentation/blocs/user_bloc.dart';
+import 'package:learning_project/presentation/blocs/user_event.dart';
+import 'package:learning_project/presentation/blocs/user_state.dart';
 import 'package:learning_project/data/models/user_model.dart' show UserModel;
 import 'package:learning_project/data/repositories/user_respository.dart';
 

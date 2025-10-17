@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:learning_project/modules/bill_extract/bill_extract_page.dart';
-import 'package:learning_project/modules/fetch_api/fetch_api_page.dart';
-import 'package:learning_project/modules/home/home_controller.dart';
-import 'package:learning_project/modules/invoice/invoice_page.dart';
+import 'package:learning_project/presentation/pages/bill_extract/bill_extract_page.dart';
+import 'package:learning_project/presentation/pages/fetch_api/fetch_api_page.dart';
+import 'package:learning_project/presentation/pages/home/home_controller.dart';
+import 'package:learning_project/presentation/pages/invoice/invoice_page.dart';
 import 'package:learning_project/shared/models/user_model.dart';
 import 'package:learning_project/shared/themes/app_colors.dart';
 import 'package:learning_project/shared/themes/app_text_styles.dart';

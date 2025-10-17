@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:learning_project/modules/add_bill/add_bill_page.dart';
-import 'package:learning_project/modules/barcode_scanner/barcode_scanner_page.dart';
-import 'package:learning_project/modules/fetch_api/fetch_api_page.dart';
-import 'package:learning_project/modules/home/home_page.dart';
-import 'package:learning_project/modules/login/login_page.dart';
-import 'package:learning_project/modules/splash/splash_page.dart';
+import 'package:learning_project/presentation/pages/add_bill/add_bill_page.dart';
+import 'package:learning_project/presentation/pages/barcode_scanner/barcode_scanner_page.dart';
+import 'package:learning_project/presentation/pages/fetch_api/fetch_api_page.dart';
+import 'package:learning_project/presentation/pages/home/home_page.dart';
+import 'package:learning_project/presentation/pages/login/login_page.dart';
+import 'package:learning_project/presentation/pages/splash/splash_page.dart';
 import 'package:learning_project/shared/themes/app_colors.dart';
 
 class AppWidget extends StatelessWidget {

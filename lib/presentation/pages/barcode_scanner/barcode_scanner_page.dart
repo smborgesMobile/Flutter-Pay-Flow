@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:learning_project/modules/barcode_scanner/barcode_controller.dart';
-import 'package:learning_project/modules/barcode_scanner/barcode_scanner_status.dart';
+import 'package:learning_project/presentation/pages/barcode_scanner/barcode_controller.dart';
+import 'package:learning_project/presentation/pages/barcode_scanner/barcode_scanner_status.dart';
 import 'package:learning_project/shared/themes/app_colors.dart';
 import 'package:learning_project/shared/themes/app_text_styles.dart';
 import 'package:learning_project/shared/widgets/bottom_sheet/bottom_sheet_widget.dart';

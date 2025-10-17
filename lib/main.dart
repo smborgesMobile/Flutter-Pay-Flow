@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:learning_project/blocs/bill_cubit.dart';
+import 'package:learning_project/presentation/blocs/bill_cubit.dart';
 import 'package:learning_project/firebase_widget.dart';
 import 'package:learning_project/di/injection.dart' as di;
 

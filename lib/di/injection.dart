@@ -6,9 +6,9 @@ import 'package:learning_project/domain/usecases/add_bill.dart';
 import 'package:learning_project/domain/usecases/get_bills.dart';
 import 'package:learning_project/domain/usecases/update_bill.dart';
 import 'package:learning_project/domain/usecases/delete_bill.dart';
-import 'package:learning_project/blocs/bill_cubit.dart';
+import 'package:learning_project/presentation/blocs/bill_cubit.dart';
 import 'package:learning_project/data/repositories/user_respository.dart';
-import 'package:learning_project/blocs/user_bloc.dart';
+import 'package:learning_project/presentation/blocs/user_bloc.dart';
 
 /// Very small factory-style DI helper. Keep it tiny so it's easy to migrate
 /// to get_it or another DI container in the future. Use `Injection` for

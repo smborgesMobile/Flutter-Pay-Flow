@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
-import 'package:learning_project/blocs/bill_cubit.dart';
-import 'package:learning_project/blocs/bill_form_cubit.dart';
+import 'package:learning_project/presentation/blocs/bill_cubit.dart';
+import 'package:learning_project/presentation/blocs/bill_form_cubit.dart';
 import 'package:learning_project/shared/models/bill_model.dart';
 import 'package:learning_project/shared/themes/app_colors.dart';
 import 'package:learning_project/shared/themes/app_text_styles.dart';
