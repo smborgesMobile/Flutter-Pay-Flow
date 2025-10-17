@@ -8,6 +8,8 @@ class AddBillFieldWidget extends StatefulWidget {
   final IconData icon;
   final String fieldType;
   final TextEditingController controller;
+  final ValueChanged<String>? onChanged;
+  final String? errorText;
 
   const AddBillFieldWidget({
     super.key,
@@ -15,6 +17,8 @@ class AddBillFieldWidget extends StatefulWidget {
     required this.icon,
     required this.fieldType,
     required this.controller,
+    this.onChanged,
+    this.errorText,
   });
 
   @override
@@ -55,12 +59,14 @@ class _AddBillFieldWidgetState extends State<AddBillFieldWidget> {
                 inputFormatters: (widget.fieldType == "value")
                     ? [MoneyInputFormatter()]
                     : [],
+                onChanged: widget.onChanged,
                 decoration: InputDecoration(
                   isDense: true,
                   border: InputBorder.none,
                   hintText: widget.hint,
                   hintStyle: const TextStyle(fontSize: 14, color: Colors.grey),
                   contentPadding: const EdgeInsets.only(left: 16, right: 15),
+                  errorText: widget.errorText,
                 ),
               ),
             ),

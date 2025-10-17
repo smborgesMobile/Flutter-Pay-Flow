@@ -2,10 +2,12 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:learning_project/data/models/user_model.dart';
+import 'package:learning_project/domain/repositories/i_user_repository.dart';
 
-class UserRepository {
+class UserRepository implements IUserRepository {
   String userUrl = 'https://reqres.in/api/users?page=2';
 
+  @override
   Future<List<UserModel>> getUsers() async {
     Response response = await get(Uri.parse(userUrl));
     if (response.statusCode == 200) {
