@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learning_project/modules/bill_extract/bill_extract_page.dart';
+import 'package:learning_project/modules/fetch_api/fetch_api_page.dart';
 import 'package:learning_project/modules/home/home_controller.dart';
 import 'package:learning_project/modules/invoice/invoice_page.dart';
 import 'package:learning_project/shared/models/user_model.dart';
@@ -17,7 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   UserModel? user;
   final homeController = HomeController();
-  final pages = [InvoicePage(), BillExtractPage()];
+  final pages = [InvoicePage(), BillExtractPage(), FetchApiPage()];
 
   @override
   void initState() {
@@ -59,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyles.captionShape,
                 ),
                 trailing: ProfileImageWidget(
-                  imageUrl: user?.photoUrl ?? "", // URL da imagem
+                  imageUrl: user?.photoUrl ?? "",
                   width: 48,
                   height: 48,
                   fit: BoxFit.cover,
@@ -108,6 +109,16 @@ class _HomePageState extends State<HomePage> {
                 },
                 icon: const Icon(Icons.description_outlined),
                 color: homeController.currentPage == 1
+                    ? AppColors.primary
+                    : AppColors.stroke,
+              ),
+              IconButton(
+                onPressed: () {
+                  homeController.setPage(2);
+                  setState(() {});
+                },
+                icon: const Icon(Icons.cloud_outlined),
+                color: homeController.currentPage == 2
                     ? AppColors.primary
                     : AppColors.stroke,
               ),
